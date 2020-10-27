@@ -90,10 +90,37 @@ const gameBoard = () => {
         {
             displayWinnerPrompt();
         }
-    }
 
+        checkTie();
+    }
+    const checkTie = () => {
+        let tie = true;
+        if (this.winner == '')
+        {
+            for (let i = 0; i < 9; i++)
+            {
+                if(board[i].innerText == '')
+                {
+                    tie = false;
+                }
+            }
+        }
+        if (tie)
+        {
+            let r = confirm("Tie game! Reset?");
+            if (r)
+            {
+                for (let i = 0; i < 9; i ++)
+                {
+                    board[i].innerText = ''
+                }
+                this.winner = '';
+                this.mark = 'X';
+            }
+        }
+    }
     const checkRows = (symbol) => {
-        for (let i = 0; i < 3; i = i + 3)
+        for (let i = 0; i <= 6; i = i + 3)
         {
             if (board[i].innerText == symbol && board[i + 1].innerText == symbol && board[i + 2].innerText == symbol)
             {
